@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@source "../**/*.blade.php";
+@source "../**/*.js"
+; @plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@source'./vendor/rappasoft/laravel-livewire-tables/resources/views/*.blade.php';
+@source'./vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/laravel/jetstream/**/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@plugin "daisyui";
+
+#drillingImageContent {
+    position: relative;           /* importante para poder moverlo */
+    transform: translate(0, 0);   /* valor inicial */
+}
+
+@theme {
+    --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-yellow-main: #E79F0D;
+    --color-yellow-light: #F4B73E;
+
+    --color-blue-main: #18344E;
+    --color-blue-light: #304D6D;
+    --color-blue-lighter: #2a4dc2;
+    --animate-fade-out: fade-out 3.5s ease-in-out forwards;
+
+
+
+    @keyframes fade-out {
+
+        0%,
+        70% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+
+    /*body{*/
+    /*    background: black;*/
+    /*}*/
+}
+
+[x-cloak] {
+    display: none;
+}
