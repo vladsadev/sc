@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DrillingGridController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InspectionIssueController;
 use App\Http\Controllers\MaintenanceController;
@@ -83,4 +85,14 @@ Route::middleware([
     Route::patch('maintenances/{maintenance}/start', [MaintenanceController::class, 'start'])->name('maintenances.start');
     Route::patch('maintenances/{maintenance}/complete', [MaintenanceController::class, 'complete'])->name('maintenances.complete');
     Route::patch('maintenances/{maintenance}/cancel', [MaintenanceController::class, 'cancel'])->name('maintenances.cancel');
+
+    // Importación
+    // Para el sistema central (importar)
+    Route::get('/dashboard/import', [ImportController::class, 'showImportForm'])->name('import.form');
+    Route::post('/dashboard/import', [ImportController::class, 'import'])->name('import.inspections');
+
+// Para el sistema local (exportar)
+    Route::get('/dashboard/export', [ExportController::class, 'export'])->name('export.inspections');
+
+
 });
