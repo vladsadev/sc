@@ -35,47 +35,47 @@ class Inspection extends Model
         'position_hours' => 'decimal:1',
 
         // SECCIÓN 1: REVISIÓN ANTES DE ARRANCAR EL MOTOR
-        'nivel_combustible_checked'      => 'boolean',
-        'nivel_aceite_motor_checked'     => 'boolean',
-        'nivel_refrigerante_checked'     => 'boolean',
-        'nivel_aceite_hidraulico_checked'=> 'boolean',
-        'purgar_agua_filtro_checked'     => 'boolean',
-        'polvo_valvula_vacio_checked'    => 'boolean',
-        'correas_alternador_checked'     => 'boolean',
-        'filtro_de_aire_checked'         => 'boolean',
-        'reservorio_de_grasa_checked'    => 'boolean',
-        'bornes_de_bateria_checked'      => 'boolean',
-        'mangueras_de_admision_checked'  => 'boolean',
-        'gatas_checked'                  => 'boolean',
+        'nivel_combustible_checked' => 'boolean',
+        'nivel_aceite_motor_checked' => 'boolean',
+        'nivel_refrigerante_checked' => 'boolean',
+        'nivel_aceite_hidraulico_checked' => 'boolean',
+        'purgar_agua_filtro_checked' => 'boolean',
+        'polvo_valvula_vacio_checked' => 'boolean',
+        'correas_alternador_checked' => 'boolean',
+        'filtro_de_aire_checked' => 'boolean',
+        'reservorio_de_grasa_checked' => 'boolean',
+        'bornes_de_bateria_checked' => 'boolean',
+        'mangueras_de_admision_checked' => 'boolean',
+        'gatas_checked' => 'boolean',
 
         // SECCIÓN 2: REVISIÓN DESPUÉS DE ARRANCAR EL MOTOR
-        'pedales_freno_checked'          => 'boolean',
-        'alarma_arranque_checked'        => 'boolean',
-        'viga_y_brazo_checked'           => 'boolean',
-        'sistema_de_rimado_checked'      => 'boolean',
-        'sistema_de_aire_checked'        => 'boolean',
-        'sistema_de_barrido_checked'     => 'boolean',
-        'booster_de_agua_checked'        => 'boolean',
-        'regulador_de_aire_lub_checked'  => 'boolean',
-        'carrete_manguera_agua_checked'  => 'boolean',
+        'pedales_freno_checked' => 'boolean',
+        'alarma_arranque_checked' => 'boolean',
+        'viga_y_brazo_checked' => 'boolean',
+        'sistema_de_rimado_checked' => 'boolean',
+        'sistema_de_aire_checked' => 'boolean',
+        'sistema_de_barrido_checked' => 'boolean',
+        'booster_de_agua_checked' => 'boolean',
+        'regulador_de_aire_lub_checked' => 'boolean',
+        'carrete_manguera_agua_checked' => 'boolean',
 
         // SECCIÓN 3: INSPECCIÓN GENERAL
         'carrete_de_posicionamiento_checked' => 'boolean',
-        'valvula_a_avance_checked'           => 'boolean',
-        'cable_retroceso_y_tensor_checked'   => 'boolean',
-        'mesa_de_perforadora_checked'        => 'boolean',
-        'dowel_checked'                      => 'boolean',
+        'valvula_a_avance_checked' => 'boolean',
+        'cable_retroceso_y_tensor_checked' => 'boolean',
+        'mesa_de_perforadora_checked' => 'boolean',
+        'dowel_checked' => 'boolean',
 
         // SECCIÓN 4: TEMA NO NEGOCIABLES
-        'freno_de_servicio_checked'          => 'boolean',
-        'freno_parqueo_checked'              => 'boolean',
-        'controles_perforacion_checked'      => 'boolean',
-        'luces_delanteras_checked'           => 'boolean',
-        'alarma_de_retroceso_checked'        => 'boolean',
-        'bocina_checked'                     => 'boolean',
-        'cinturon_de_seguridad_checked'      => 'boolean',
-        'switch_master_checked'              => 'boolean',
-        'paradas_de_emergencia_checked'      => 'boolean',
+        'freno_de_servicio_checked' => 'boolean',
+        'freno_parqueo_checked' => 'boolean',
+        'controles_perforacion_checked' => 'boolean',
+        'luces_delanteras_checked' => 'boolean',
+        'alarma_de_retroceso_checked' => 'boolean',
+        'bocina_checked' => 'boolean',
+        'cinturon_de_seguridad_checked' => 'boolean',
+        'switch_master_checked' => 'boolean',
+        'paradas_de_emergencia_checked' => 'boolean',
 
     ];
 
@@ -102,18 +102,6 @@ class Inspection extends Model
      */
 
     /**
-     * Obtener la inspección anterior para este equipo
-     */
-    public function previousInspection()
-    {
-        return self::where('equipment_id', $this->equipment_id)
-            ->where('inspection_date', '<', $this->inspection_date)
-            ->orderBy('inspection_date', 'desc')
-            ->first();
-    }
-
-
-    /**
      * Calcular las horas de motor trabajadas desde la inspección anterior
      */
     public function getEngineHoursWorkedAttribute(): float
@@ -124,6 +112,17 @@ class Inspection extends Model
             return 0;
         }
         return max(0, ($this->engine_hours ?? 0) - $previous->engine_hours);
+    }
+
+    /**
+     * Obtener la inspección anterior para este equipo
+     */
+    public function previousInspection()
+    {
+        return self::where('equipment_id', $this->equipment_id)
+            ->where('inspection_date', '<', $this->inspection_date)
+            ->orderBy('inspection_date', 'desc')
+            ->first();
     }
 
     /**
@@ -234,12 +233,73 @@ class Inspection extends Model
      */
     public function getFormattedStatusAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'completada' => 'Completada',
             'completada_con_observaciones' => 'Completada con observaciones',
             'requiere_atencion_urgente' => 'Requiere atención urgente',
             default => ucfirst($this->status)
         };
     }
+
+    public function getExportableFields()
+    {
+        return $this->only([
+            // SECCIÓN 1: REVISIÓN ANTES DE ARRANCAR EL MOTOR
+            'nivel_combustible_checked',
+            'nivel_aceite_motor_checked',
+            'nivel_refrigerante_checked',
+            'nivel_aceite_hidraulico_checked',
+            'purgar_agua_filtro_checked',
+            'polvo_valvula_vacio_checked',
+            'correas_alternador_checked',
+            'filtro_de_aire_checked',
+            'reservorio_de_grasa_checked',
+            'bornes_de_bateria_checked',
+            'mangueras_de_admision_checked',
+            'gatas_checked',
+
+            // SECCIÓN 2: REVISIÓN DESPUÉS DE ARRANCAR EL MOTOR
+            'pedales_freno_checked',
+            'alarma_arranque_checked',
+            'viga_y_brazo_checked',
+            'sistema_de_rimado_checked',
+            'sistema_de_aire_checked',
+            'sistema_de_barrido_checked',
+            'booster_de_agua_checked',
+            'regulador_de_aire_lub_checked',
+            'carrete_manguera_agua_checked',
+
+            // SECCIÓN 3: INSPECCIÓN GENERAL
+            'carrete_de_posicionamiento_checked',
+            'valvula_a_avance_checked',
+            'cable_retroceso_y_tensor_checked',
+            'mesa_de_perforadora_checked',
+            'dowel_checked',
+            // SECCIÓN 4: TEMAS NO NEGOCIABLES
+            'freno_de_servicio_checked',
+            'freno_parqueo_checked',
+            'controles_perforacion_checked',
+            'luces_delanteras_checked',
+            'alarma_de_retroceso_checked',
+            'bocina_checked',
+            'cinturon_de_seguridad_checked',
+            'switch_master_checked',
+            'paradas_de_emergencia_checked',
+
+            // Horómetros
+            'engine_hours',
+            'percussion_hours',
+            'position_hours',
+
+            // EPP
+            'epp_complete',
+
+            // Campos de tracking
+            'import_batch',
+            'exported'  // Se marca como no exportada en el sistema central
+
+        ]);
+    }
+
 
 }
