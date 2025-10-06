@@ -15,6 +15,10 @@ class ExportController extends Controller
             ->where('user_id', auth()->id())
             ->get();
 
+        if($inspections->isEmpty()){
+            return redirect(route('dashboard'))->with('fail', 'No hay inspecciones para exportar');
+        }
+
         $exportData = [
             'export_info' => [
                 'inspector_id' => auth()->id(),

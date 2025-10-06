@@ -34,7 +34,7 @@
                         <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
                             <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
                             </svg>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                             <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             @forelse($equipmentTypeDetails as $typeDetail)
                 <div
-                    class="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
+                        class="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
                     <!-- Header del tipo de equipo -->
                     <div class="bg-linear-to-r {{ $typeDetail['gradient_class'] }} px-6 py-4">
                         <div class="flex items-center justify-between">
@@ -219,13 +219,13 @@
         <div class="border border-yellow-main mt-5 mb-3"></div>
 
         <!-- Sección para la importación y exportación  -->
-        <div class="mx-auto max-w-7xl hidden">
+        <div class="mx-auto max-w-7xl">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Importar y Exportar Inspecciones</h2>
             <p class="italic">Considerar que la importación será exitosa si y solo si los equipos existen y coinciden .</p>
 
             <div class="py-4 space-x-2.5">
-                <x-link-btn href="#">Exportar</x-link-btn>
-                <x-link-btn href="" variant="outline-solid">Importar</x-link-btn>
+                <x-link-btn href="{{route('export.inspections')}}">Exportar</x-link-btn>
+                <x-link-btn href="{{route('import.form')}}" variant="outline-solid">Importar</x-link-btn>
             </div>
         </div>
 
