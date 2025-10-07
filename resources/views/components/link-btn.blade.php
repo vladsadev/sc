@@ -10,7 +10,7 @@
 
     $variants = [
         'primary' => 'bg-yellow-main hover:bg-blue-main text-white',
-        'secondary' => 'bg-gray-500 hover:bg-gray-600 text-white',
+        'secondary' => 'bg-gray-500 hover:bg-blue-main text-white',
         'action' => 'bg-blue',
         'danger' => 'bg-red-600 hover:bg-blue-main text-white',
         'db' => 'bg-rose-900 hover:bg-gray-600 text-white',

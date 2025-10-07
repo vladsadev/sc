@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\UserRoleController;
+use App\Models\Inspection;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
@@ -47,4 +48,5 @@ class AppServiceProvider extends ServiceProvider
 
 
     }
+
 }

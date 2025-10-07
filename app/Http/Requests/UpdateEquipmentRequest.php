@@ -27,6 +27,8 @@ class UpdateEquipmentRequest extends FormRequest
             // Campos obligatorios
             'equipment_type_id' => 'required|exists:equipment_types,id',
 
+
+
             // Código único pero excluyendo el registro actual
             'code' => [
                 'required',
@@ -47,6 +49,8 @@ class UpdateEquipmentRequest extends FormRequest
 
             // Archivos opcionales (en actualización)
             'equipment_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // Max 5MB
+            'remove_image' => 'nullable|in:0,1',
+
 
             // Fechas de mantenimiento (pueden actualizarse)
             'last_maintenance' => 'nullable|date|before_or_equal:today',

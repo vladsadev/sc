@@ -13,7 +13,12 @@ if($estado === 'operativa'){
 
         <!-- Imagen principal -->
 <div class="relative">
-    <img src="{{Vite::asset('resources/images/simba1.webp')}}" alt="SIMBA S7D" class="w-full h-72 object-cover">
+    <img
+
+        src="{{ $equipment->equipment_img ? asset('storage/' . $equipment->equipment_img) : Vite::asset
+            ('resources/images/simba1.webp') }}"
+
+         alt="SIMBA S7D" class="w-full h-72 object-cover">
     <span class="absolute top-4 left-4 text-blue-main text-sm md:text-base font-semibold px-4 py-1 rounded-full
     shadow {{$classes}}">
         {{__($equipment->status)}}
@@ -76,11 +81,5 @@ if($estado === 'operativa'){
 
         </div>
     </div>
-
-    <!-- Manuales-->
-    {{--    <div>--}}
-    {{--        <h3 class="text-xl font-semibold text-gray-800 mb-3">Manuales</h3>--}}
-    {{--        --}}
-    {{--    </div>--}}
 
 </div>

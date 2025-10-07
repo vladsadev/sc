@@ -82,7 +82,9 @@
                 <x-forms.select label="Tipo de Equipo" name="equipment_type_id" required>
                     <option value="">Seleccione un tipo</option>
                     @foreach($eTypes as $type)
-                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        <option value="{{ $type->id }}" {{ old('equipment_type_id') == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
                     @endforeach
                 </x-forms.select>
             </div>
@@ -91,9 +93,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <x-forms.select label="Tipo de Combustible" name="fuel_type">
                     <option value="">Seleccione (opcional)</option>
-                    <option value="diesel">Diesel</option>
-                    <option value="gasolina">Gasolina</option>
-                    <option value="eléctrico">Eléctrico</option>
+                    <option value="diesel" {{old('fuel_type')=='diesel'? 'selected':''}}>Diesel</option>
+                    <option value="gasolina" {{old('fuel_type')=='gasolina'? 'selected':''}} >Gasolina</option>
+                    <option value="eléctrico" {{old('fuel_type')=='eléctrico'? 'selected':''}} >Eléctrico</option>
                 </x-forms.select>
 
                 <x-forms.input

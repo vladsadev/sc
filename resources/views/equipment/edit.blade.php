@@ -107,39 +107,36 @@
                 />
             </div>
 
-            <!-- Archivos -->
-            @if($equipment->manual_pdf)
-                <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                    <p class="text-sm text-gray-600 mb-2">Manual actual:</p>
-                    <a class="text-blue-600 hover:text-blue-800 underline"
-                       href="{{ route('equipment.manual', $equipment->id) }}"
-                       target="_blank">
-                        Ver Manual
-                    </a>
-                </div>
-            @endif
-
-            <div class="mb-4">
-                <x-forms.input
-                    label="Actualizar Manual (PDF)"
-                    name="manual_pdf"
-                    type="file"
-                    accept=".pdf"
-                    class="border border-slate-600"
-                />
-                @if($equipment->manual_pdf)
-                    <small class="text-gray-500 mt-1">Deje vacío para mantener el manual actual</small>
-                @endif
-            </div>
 
             @if($equipment->equipment_img)
                 <div class="mb-4 p-3 bg-gray-50 rounded-lg">
                     <p class="text-sm text-gray-600 mb-2">Imagen actual:</p>
                     <img src="{{ Storage::url($equipment->equipment_img) }}"
                          alt="Imagen del equipo"
-                         class="h-32 w-auto rounded-sm shadow-xs">
+                         class="h-32 w-auto rounded-sm shadow-xs mb-3">
+
+                    <button type="button"
+                            onclick="confirmarEliminacion()"
+                            class="px-4 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition">
+                        🗑️ Eliminar Imagen
+                    </button>
+
+                    <!-- Campo oculto para marcar la eliminación -->
+                    <input type="hidden" name="remove_image" id="remove_image" value="0">
                 </div>
             @endif
+
+            <script>
+                function confirmarEliminacion() {
+                    if (confirm('¿Estás seguro de que deseas eliminar esta imagen?')) {
+                        document.getElementById('remove_image').value = '1';
+                        // Ocultar la imagen actual
+                        event.target.closest('.bg-gray-50').style.display = 'none';
+                        // Mostrar mensaje de confirmación
+                        alert('La imagen será eliminada al guardar los cambios');
+                    }
+                }
+            </script>
 
             <div class="mb-4">
                 <x-forms.input

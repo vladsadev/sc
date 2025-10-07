@@ -50,10 +50,24 @@ class EquipmentController extends Controller
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
         try {
-            // Obtener datos validados
             $validatedData = $request->validated();
 
-            // Manejar la actualización de la imagen
+            // Verificar si se solicitó eliminar la imagen
+            if ($request->input('remove_image') == '1') {
+                if ($equipment->equipment_img) {
+                    // Eliminar la imagen del storage
+                    $oldImgPath = storage_path('app/public/' . $equipment->equipment_img);
+                    if (file_exists($oldImgPath)) {
+                        unlink($oldImgPath);
+                    } else {
+                        Storage::disk('public')->delete($equipment->equipment_img);
+                    }
+                    // Marcar para actualizar como null
+                    $validatedData['equipment_img'] = null;
+                }
+            }
+
+            // Manejar la actualización de la imagen (subir nueva)
             if ($request->hasFile('equipment_img')) {
                 // Eliminar la imagen anterior si existe
                 if ($equipment->equipment_img) {

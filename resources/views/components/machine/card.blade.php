@@ -12,7 +12,11 @@ if($estado === 'operativa'){
 <div class="bg-white rounded-xl shadow-md border overflow-hidden hover:shadow-lg transition">
     <!-- Imagen -->
     <div class="relative">
-        <img src="{{Vite::asset('resources/images/simba1.webp')}}" alt="SIMBA S7D" class="w-full h-40 object-cover">
+        <img
+            src="{{ $machine->equipment_img ? asset('storage/' . $machine->equipment_img) : Vite::asset
+            ('resources/images/simba1.webp') }}"
+            alt="Imagen del equipo"
+            class="w-full h-40 object-cover">
         <span class="absolute top-4 left-4 text-blue-main text-sm md:text-base font-semibold px-4 py-1 rounded-full
     shadow {{$classes}}">
         {{__($machine->status)}}
@@ -58,9 +62,20 @@ if($estado === 'operativa'){
 
 
         <!-- Botone(s) de acción-->
-        <div class="flex justify-end pt-2 flex-wrap gap-2">
+        <div class="flex items-center justify-between pt-2 flex-wrap gap-2">
+            <div>
+                <x-link-btn variant="secondary" href="{{route('maintenances.create',$machine)}}">Mantenimiento</x-link-btn>
+                <x-link-btn variant="secondary" href="{{route('inspection.create',$machine)}}">Inspección</x-link-btn>
+
+{{--                <x-link-btn size="sm" href="{{route('equipment.show',$machine['id'])}}">--}}
+{{--                    Inspección--}}
+{{--                </x-link-btn>--}}
+{{--                <x-link-btn size="sm" href="{{route('equipment.show',$machine['id'])}}">--}}
+{{--                   Mantenimiento--}}
+{{--                </x-link-btn>--}}
+            </div>
             <x-link-btn href="{{route('equipment.show',$machine['id'])}}">
-                Detalles del Equipo
+                Ver Más
             </x-link-btn>
         </div>
     </div>

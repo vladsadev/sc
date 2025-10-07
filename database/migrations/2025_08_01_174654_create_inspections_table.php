@@ -75,6 +75,8 @@ return new class extends Migration {
             $table->boolean('epp_complete')->default(false);
 
             $table->timestamps();
+
+            $table->integer('sort');
         });
     }
 

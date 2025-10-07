@@ -221,7 +221,7 @@
         <!-- Sección para la importación y exportación  -->
         <div class="mx-auto max-w-7xl">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Importar y Exportar Inspecciones</h2>
-            <p class="italic">Considerar que la importación será exitosa si y solo si los equipos existen y coinciden .</p>
+            <p class="italic">La importación será exitosa solo si los equipos existen y coinciden en sus características.</p>
 
             <div class="py-4 space-x-2.5">
                 <x-link-btn href="{{route('export.inspections')}}">Exportar</x-link-btn>

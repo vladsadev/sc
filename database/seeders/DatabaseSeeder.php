@@ -18,19 +18,31 @@ class DatabaseSeeder extends Seeder
 
 //        User::factory(10)->create();
 
-        User::factory()->create([
+//        User::factory()->create([
+//            'name' => 'Pepe',
+//            'email' => 'pepe@pp.com',
+//            'password' => '1524780032',
+//            'is_admin' => 1
+//        ]);
+//        User::factory()->create([
+//            'name' => 'Carlangas',
+//            'email' => 'cc@cc.com',
+//            'password' => '1524780032',
+//            'is_admin' => 1
+//        ]);
+
+        User::create([
             'name' => 'Pepe',
             'email' => 'pepe@pp.com',
             'password' => '1524780032',
             'is_admin' => 1
         ]);
-        User::factory()->create([
+        User::create([
             'name' => 'Carlangas',
             'email' => 'cc@cc.com',
             'password' => '1524780032',
             'is_admin' => 1
         ]);
-
 //        $this->call(EquipmentSeeder::class);
         EquipmentType::factory()->acarreo()->create();
         EquipmentType::factory()->perforadora()->create();
